@@ -1,0 +1,62 @@
+body {
+	max-width: 400px;
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 10px;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+.header {
+	text-align: center;
+	font-family: 'Lobster', cursive;
+}
+
+.map {
+	text-align: center;
+	height: 350px;
+	margin: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-family: 'Alegreya Sans', sans-serif;
+}
+
+.map li {
+	list-style-type: none;
+	margin-left: 50px;
+	font-family: 'Alegreya Sans', sans-serif;
+}
+
+.green-bike {
+	background-image: url(../images/bike-icon-green.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+}
+
+.amber-bike {
+	background-image: url(../images/bike-icon-orange.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+}
+
+.red-bike {
+	background-image: url(../images/bike-icon-red.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+}
+
+.station-info {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-family: 'Alegreya Sans', sans-serif;
+}
+
+.directions {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	font-family: 'Alegreya Sans', sans-serif;
+}
