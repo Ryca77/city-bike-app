@@ -31,7 +31,7 @@ function getLocation() {
 		var mapImage = new Image();
 		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false";
 	
-		bikeMap.appendChild(mapImage)
+		bikeMap.appendChild(mapImage);
 	};
 
 	function locationError() {
