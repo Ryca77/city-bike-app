@@ -29,7 +29,7 @@ function getLocation() {
 		console.log(latitude);
 		console.log(longitude);
 		var mapImage = new Image();
-		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false";
+		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false&key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ";
 	
 		bikeMap.appendChild(mapImage);
 	};
