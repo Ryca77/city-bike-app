@@ -28,7 +28,7 @@ function getLocation() {
 		var logitude = position.coords.longitude;
 		console.log(latitude);
 		var mapImage = new Image();
-		img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 	
 		bikeMap.appendChild(mapImage)
 	};
