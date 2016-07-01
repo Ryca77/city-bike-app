@@ -1,11 +1,13 @@
 $(document).ready(function(){
 
+//show logo then bike finder button//
 window.onload = function() {
 	$('.launch-screen').fadeIn(1000);
 	$('.launch-screen').delay(2000).fadeOut(1000);
 	$('.get-location').delay(4000).fadeIn(1000);
 }
 
+//call location function on button click//
 $('.find-bike').on('click', function() {
 
 	$('.get-location').fadeOut(1000);
@@ -15,6 +17,7 @@ $('.find-bike').on('click', function() {
 
 });
 
+//navigator geolocation function showing google map with marker//
 function getLocation() {
 	var bikeMap = document.getElementById('map');
 
@@ -52,6 +55,40 @@ function getLocation() {
 	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
 
+//get data from city bikes api//
+function getBikeData() {
+
+	url = "http://api.citybik.es/v2/networks"
+	$.getJSON(url, function(data) {
+
+	console.log(data);
+	
+
+	//loop through data//
+	$.each(data.networks, function(index, listings) {
+		var stations = listings.id
+		console.log(stations)
+	});
+
+	var networkId = data.networks[0].id
+	console.log(networkId)
+
+	url = "http://api.citybik.es/v2/networks/" + networkId + ""
+	$.getJSON(url, function(networks) {
+	console.log(networks)
+
+	});
+});
+	
+}
+
+getBikeData()
+
+
 });
 
-/*mapImage.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ&center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false"*/
+/*for (var i = 0; i < data.networks.length; i++) {
+	$('#locations').append('<div>' + data.networks[i].company + '</div>')
+	}
+});
+}*/
