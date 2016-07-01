@@ -29,7 +29,7 @@ function getLocation() {
 		console.log(latitude);
 		console.log(longitude);
 		var mapImage = new Image();
-		mapImage.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ&center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false";
+		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false";
 	
 		bikeMap.appendChild(mapImage)
 	};
@@ -38,9 +38,11 @@ function getLocation() {
 		bikeMap.innerHTML = "Unable to retrieve your location";
 	};
 
-	bikeMap.innerHTML= "<p>Finding Location</p>";
+	bikeMap.innerHTML= "<p>Finding Location...</p>";
 
 	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
 
 });
+
+/*mapImage.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ&center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false"*/
