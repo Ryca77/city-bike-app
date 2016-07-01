@@ -25,8 +25,9 @@ function getLocation() {
 
 	function locationSuccess(position) {
 		var latitude = position.coords.latitude;
-		var logitude = position.coords.longitude;
+		var longitude = position.coords.longitude;
 		console.log(latitude);
+		console.log(longitude);
 		var mapImage = new Image();
 		mapImage.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 	
