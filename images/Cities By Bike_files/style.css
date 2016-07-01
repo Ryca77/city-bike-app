@@ -9,31 +9,23 @@ body {
 }
 
 .launch-screen {
-	display: none;
 	background-image: url(../images/logo-big.png);
 	background-repeat: no-repeat;
 	background-size: 350px;
-	background-position: center;
-	margin-top: 250px;
-	height: 75px;
 }
 
 .get-location {
-	display: none;
 	background-image: url(../images/triple-bike-big.png);
 	background-repeat: no-repeat;
-	background-size: 200px;
-	background-position: center;
-	margin-top: 150px;
-	height: 350px;
+	background-size: 300px;
 }
 
 .find-bike {
-	display: block;
-	margin: 0 auto;
+	display: none;
 	border-radius: 5px;
-	font-size: 30px;
+	font-size: 20px;
 	font-family: 'Lobster', cursive;
+
 }
 
 .main-content{

@@ -6,24 +6,31 @@
 	<title>Cities By Bike</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans' rel='stylesheet' type='text/css'>
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
 <body>
-<div>
-	<h1 class="header">Cities By Bike</h1>
+<div class="launch-screen"></div>
+<div class="get-location">
+	<button class="find-bike">Find Me A Bike</button>
 </div>
-<div class="map">Map showing user location and nearest bike stations<br></br>
-	<li class="green-bike">Colour of icon represents</li>
-	<li class="amber-bike">number of bikes</li>
-	<li class="red-bike">available at that station</li>
-</div>
-<div class="station-info">Santander Cycles<br></br>Drury Lane, Covent Garden<br></br>
-	<li>Bikes Available</li>
-	<li>Empty Slots</li>
-</div>
-<div><button class="directions">Show Directions</button>
+<div class="main-content">
+	<div>
+		<h1 class="header">Cities By Bike</h1>
+		<i class="fa fa-bars fa-2x"></i>
+	</div>
+	<div class="map">Map showing user location and nearest bike stations<br></br>
+		<li class="green-bike">Colour of icon represents</li>
+		<li class="amber-bike">number of bikes</li>
+		<li class="red-bike">available at that station</li>
+	</div>
+	<div class="station-info">Santander Cycles<br></br>Drury Lane, Covent Garden<br></br>
+		<li>Bikes Available</li>
+		<li>Empty Slots</li>
+	</div>
+	<button class="directions">Show Directions</button>
 </div>
 </body>
