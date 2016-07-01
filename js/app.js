@@ -7,14 +7,39 @@ window.onload = function() {
 }
 
 $('.find-bike').on('click', function() {
-  var startPos;
-  var geoSuccess = function(position) {
-    startPos = position;
-    document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-    document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-  };
-  navigator.geolocation.getCurrentPosition(geoSuccess);
+
+	$('.get-location').fadeOut(1000);
+	$('.main-content').delay(1000).fadeIn(500);
+
+	getLocation();
+
 });
 
+function getLocation() {
+	var bikeMap = document.getElementById('map');
+
+	if(!navigator.geolocation) {
+		bikeMap.innerHTML = "<p>Geolocation is not supported by your browser</p>"
+		return;
+	}
+
+	function locationSuccess(position) {
+		var latitude = position.coords.latitude;
+		var logitude = position.coords.longitude;
+		console.log(latitude);
+		var mapImage = new Image();
+		img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+	
+		bikeMap.appendChild(mapImage)
+	};
+
+	function locationError() {
+		bikeMap.innerHTML = "Unable to retrieve your location";
+	};
+
+	bikeMap.innerHTML= "<p>Finding Location</p>";
+
+	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+}
 
 });
