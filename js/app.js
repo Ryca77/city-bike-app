@@ -26,12 +26,21 @@ function getLocation() {
 	function locationSuccess(position) {
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
+		var mapCenter = {lat: latitude, lng: longitude};
 		console.log(latitude);
 		console.log(longitude);
-		var mapImage = new Image();
-		mapImage.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ&center=" + latitude + "," + longitude + "&zoom=15&size=300x300&sensor=false";
-	
-		bikeMap.appendChild(mapImage);
+        var mapImage = new google.maps.Map(document.getElementById('map'), {
+          center: mapCenter,
+          zoom: 15
+        });
+        var marker = new google.maps.Marker({
+    	position: mapCenter,
+    	map: mapImage,
+    	title: 'Your Location!'
+    	});
+
+    	$(bikeMap).html(mapImage);
+		
 	};
 
 	function locationError() {
