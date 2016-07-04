@@ -58,32 +58,46 @@ function getLocation() {
 //get data from city bikes api//
 function getBikeData() {
 
+	//initial list of networks//
 	url = "http://api.citybik.es/v2/networks"
 	$.getJSON(url, function(data) {
-
-	console.log(data);
+		console.log(data);
 	
-
-	//loop through data//
+	//loop through networks//
 	$.each(data.networks, function(index, listings) {
-		var stations = listings.id
-		console.log(stations)
-	});
+		var networkId = listings.id;
+		console.log(networkId);
 
-	var networkId = data.networks[0].id
-	console.log(networkId)
-
+	//additional data for each network//
 	url = "http://api.citybik.es/v2/networks/" + networkId + ""
 	$.getJSON(url, function(networks) {
-	console.log(networks)
+		console.log(networks);
+		console.log(networks.network.stations);
+
+	//loop through stations data for each network//
+	$.each(networks.network.stations, function(index, station) {
+		var stationName = station.name;
+		var freeBikes = station.free_bikes;
+		var emptySlots = station.empty_slots;
+		var stationLat = station.latitude;
+		var stationLong = station.longitude;
 
 	});
+
+	});
+
+	});
+
 });
-	
+
+
+
 }
 
 getBikeData()
 
+
+}
 
 });
 
