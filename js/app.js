@@ -3,8 +3,8 @@ $(document).ready(function(){
 //show logo then bike finder button//
 window.onload = function() {
 	$('.launch-screen').fadeIn(1000);
-	$('.launch-screen').delay(2000).fadeOut(1000);
-	$('.get-location').delay(4000).fadeIn(1000);
+	$('.launch-screen').delay(1500).fadeOut(1000);
+	$('.get-location').delay(3500).fadeIn(1000);
 }
 
 //call location function on button click//
@@ -36,10 +36,15 @@ function getLocation() {
           center: mapCenter,
           zoom: 15
         });
+        var iconLocation = {
+        	url: "../images/current-location-icon.png",
+        	scaledSize: new google.maps.Size(30, 35)
+        }
         var marker = new google.maps.Marker({
     	position: mapCenter,
     	map: mapImage,
-    	title: 'Your Location!'
+    	title: 'Your Location!',
+    	icon: iconLocation
     	});
 
         $(bikeMap).html(mapImage);
@@ -71,12 +76,36 @@ function getLocation() {
 			var stationLat = station.latitude;
 			var stationLong = station.longitude;
 			var stationPosition = {lat: stationLat, lng: stationLong};
-	
+
 		//create markers for each station and add info to panel on click//
+        var iconGreen = {
+        	url: "../images/bike-icon-green.png",
+        	scaledSize: new google.maps.Size(35, 25)
+        };
+        var iconAmber = {
+        	url: "../images/bike-icon-orange.png",
+        	scaledSize: new google.maps.Size(35, 25)
+        };
+        var iconRed = {
+        	url: "../images/bike-icon-red.png",
+        	scaledSize: new google.maps.Size(35, 25)
+        };
+        var mapIcon = function() {
+        	if(freeBikes >= 5) {
+        		return iconGreen
+        	}
+        	else if(freeBikes < 5) {
+        		return iconAmber
+        	}
+        	else if(freeBikes = 0) {
+        		return iconRed
+        	}
+        }
         var stationMarker = new google.maps.Marker({
     	position: stationPosition,
     	map: mapImage,
-    	customInfo: networkId, stationName, freeBikes, emptySlots
+    	customInfo: networkId, stationName, freeBikes, emptySlots,
+    	icon: iconRed
     	});
 
     	google.maps.event.addListener(stationMarker, 'click', function() {
@@ -90,7 +119,7 @@ function getLocation() {
 });
 	});
 });
-	
+
 };
 
 getBikeData();
@@ -105,5 +134,15 @@ getBikeData();
 
 	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
+
+//show menu//
+$('.fa-bars').on('click', function() {
+	if($('.menu').is(':hidden')) {
+		$('.menu').show();
+	}
+	else if($('.menu').is(':visible')) {
+		$('.menu').hide();
+	}
+});
 
 });
