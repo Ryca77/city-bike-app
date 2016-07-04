@@ -13,7 +13,7 @@ $('.find-bike').on('click', function() {
 	$('.get-location').fadeOut(1000);
 	$('.main-content').delay(1000).fadeIn(500);
 
-	getLocation();
+getLocation();
 
 });
 
@@ -42,9 +42,60 @@ function getLocation() {
     	title: 'Your Location!'
     	});
 
-    	$(bikeMap).html(mapImage);
-		
-	};
+        $(bikeMap).html(mapImage);
+
+		//get data from city bikes api//
+		function getBikeData() {
+
+		//initial list of networks//
+		url = "http://api.citybik.es/v2/networks"
+			$.getJSON(url, function(data) {
+			/*console.log(data);*/
+	
+		//loop through networks//
+		$.each(data.networks, function(index, listings) {
+			var networkId = listings.id;
+			/*console.log(networkId);*/
+	
+		//additional data for each network//
+		url = "http://api.citybik.es/v2/networks/" + networkId + ""
+			$.getJSON(url, function(networks) {
+			/*console.log(networks);*/
+			/*console.log(networks.network.stations);*/
+	
+		//loop through stations data for each network//
+		$.each(networks.network.stations, function(index, station) {
+			var stationName = station.name;
+			var freeBikes = "Available Bikes: " + station.free_bikes + "";
+			var emptySlots = "Empty Slots: " + station.empty_slots + "";
+			var stationLat = station.latitude;
+			var stationLong = station.longitude;
+			var stationPosition = {lat: stationLat, lng: stationLong};
+	
+		//create markers for each station and add info to panel on click//
+        var stationMarker = new google.maps.Marker({
+    	position: stationPosition,
+    	map: mapImage,
+    	customInfo: networkId, stationName, freeBikes, emptySlots
+    	});
+
+    	google.maps.event.addListener(stationMarker, 'click', function() {
+    	$('.scheme-name').html(this.customInfo);
+    	$('.station-name').html(this.stationName);
+    	$('.free-bikes').html(this.freeBikes);
+		$('.empty-slots').html(this.emptySlots);
+		});
+
+	});
+});
+	});
+});
+	
+};
+
+getBikeData();
+
+};
 
 	function locationError() {
 		bikeMap.innerHTML = "Unable to retrieve your location";
@@ -55,54 +106,4 @@ function getLocation() {
 	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
 
-//get data from city bikes api//
-function getBikeData() {
-
-	//initial list of networks//
-	url = "http://api.citybik.es/v2/networks"
-	$.getJSON(url, function(data) {
-		console.log(data);
-	
-	//loop through networks//
-	$.each(data.networks, function(index, listings) {
-		var networkId = listings.id;
-		console.log(networkId);
-
-	//additional data for each network//
-	url = "http://api.citybik.es/v2/networks/" + networkId + ""
-	$.getJSON(url, function(networks) {
-		console.log(networks);
-		console.log(networks.network.stations);
-
-	//loop through stations data for each network//
-	$.each(networks.network.stations, function(index, station) {
-		var stationName = station.name;
-		var freeBikes = station.free_bikes;
-		var emptySlots = station.empty_slots;
-		var stationLat = station.latitude;
-		var stationLong = station.longitude;
-
-	});
-
-	});
-
-	});
-
 });
-
-
-
-}
-
-getBikeData()
-
-
-}
-
-});
-
-/*for (var i = 0; i < data.networks.length; i++) {
-	$('#locations').append('<div>' + data.networks[i].company + '</div>')
-	}
-});
-}*/

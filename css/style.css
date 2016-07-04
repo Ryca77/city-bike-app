@@ -1,6 +1,6 @@
 body {
 	max-width: 400px;
-	height: 635px;
+	height: 615px;
 	width: 100%;
 	margin: 0 auto;
 	margin-top: 10px;
@@ -31,9 +31,16 @@ body {
 .find-bike {
 	display: block;
 	margin: 0 auto;
+	border: none;
+	border: 2px solid black;
 	border-radius: 5px;
 	font-size: 30px;
 	font-family: 'Lobster', cursive;
+	background-color: #FFFFFF;
+}
+
+.find-bike:hover {
+	background-color: lightgray;
 }
 
 .main-content{
@@ -87,6 +94,7 @@ body {
 }
 
 .station-info {
+	height: 140px;
 	margin: 10px;
 	padding: 10px;
 	border: 1px solid black;
@@ -94,8 +102,22 @@ body {
 	font-family: 'Merriweather Sans', sans-serif;
 }
 
+.scheme-name {
+	margin-top: 10px;
+	line-height: 3px;
+	text-transform: capitalize;
+}
+
+.station-name {
+	text-transform: capitalize;
+}
+
+.station-info li {
+	list-style-type: none;
+}
+
 .directions {
-	display: block;
+	display: none;
 	margin: 0 auto;
 	margin-bottom: 10px;
 	border-radius: 5px;
