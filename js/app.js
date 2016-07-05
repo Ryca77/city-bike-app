@@ -17,6 +17,15 @@ getLocation();
 
 });
 
+//update location//
+$('.map').on('click', function() {
+	$('.map-overlay').fadeIn(500);	
+});
+$('.map-overlay').on('click', function() {
+	getLocation();
+	$('.map-overlay').hide();
+});
+
 //navigator geolocation function showing google map with marker//
 function getLocation() {
 	var bikeMap = document.getElementById('map');
@@ -37,8 +46,8 @@ function getLocation() {
           zoom: 15
         });
         var iconLocation = {
-        	url: "../images/current-location-icon.png",
-        	scaledSize: new google.maps.Size(30, 35)
+        	url: "../images/current-location-icon3.png",
+        	scaledSize: new google.maps.Size(23, 35)
         }
         var marker = new google.maps.Marker({
     	position: mapCenter,
