@@ -62,7 +62,7 @@ function getLocation() {
 		function getBikeData() {
 
 		//initial list of networks//
-		url = "http://api.citybik.es/v2/networks"
+		url = "//api.citybik.es/v2/networks"
 			$.getJSON(url, function(data) {
 			console.log(data);
 	
@@ -73,7 +73,7 @@ function getLocation() {
 			/*console.log(networkId);*/
 	
 		//additional data for each network//
-		url = "http://api.citybik.es/v2/networks/" + networkId + ""
+		url = "//api.citybik.es/v2/networks/" + networkId + ""
 			$.getJSON(url, function(networks) {
 			/*console.log(networks);*/
 			/*console.log(networks.network.stations);*/
