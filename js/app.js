@@ -64,11 +64,12 @@ function getLocation() {
 		//initial list of networks//
 		url = "http://api.citybik.es/v2/networks"
 			$.getJSON(url, function(data) {
-			/*console.log(data);*/
+			console.log(data);
 	
 		//loop through networks//
 		$.each(data.networks, function(index, listings) {
 			var networkId = listings.id;
+			var networkName = listings.name;
 			/*console.log(networkId);*/
 	
 		//additional data for each network//
@@ -88,33 +89,32 @@ function getLocation() {
 
 		//create markers for each station and add info to panel on click//
         var iconGreen = {
-        	url: "../images/bike-icon-green.png",
-        	scaledSize: new google.maps.Size(35, 25)
+        	url: "../images/bike-icon-green-small.png",
+        	/*scaledSize: new google.maps.Size(40, 25)*/
         };
         var iconAmber = {
-        	url: "../images/bike-icon-orange.png",
-        	scaledSize: new google.maps.Size(35, 25)
+        	url: "../images/bike-icon-orange-small.png",
+        	/*scaledSize: new google.maps.Size(40, 25)*/
         };
         var iconRed = {
-        	url: "../images/bike-icon-red.png",
-        	scaledSize: new google.maps.Size(35, 25)
+        	url: "../images/bike-icon-red-small.png",
+        	/*scaledSize: new google.maps.Size(40, 25)*/
         };
-        var mapIcon = function() {
-        	if(freeBikes >= 5) {
-        		return iconGreen
+        if(station.free_bikes >= 5) {
+        	var mapIcon = iconGreen;
         	}
-        	else if(freeBikes < 5) {
-        		return iconAmber
+        else if(station.free_bikes > 0 && station.free_bikes < 5) {
+        	var mapIcon = iconAmber;
         	}
-        	else if(freeBikes = 0) {
-        		return iconRed
+        else if(station.free_bikes === 0) {
+        	var mapIcon = iconRed;
         	}
-        }
+        
         var stationMarker = new google.maps.Marker({
     	position: stationPosition,
     	map: mapImage,
-    	customInfo: networkId, stationName, freeBikes, emptySlots,
-    	icon: iconRed
+    	customInfo: networkName, stationName, freeBikes, emptySlots,
+    	icon: mapIcon
     	});
 
     	google.maps.event.addListener(stationMarker, 'click', function() {
