@@ -46,8 +46,8 @@ function getLocation() {
           zoom: 15
         });
         var iconLocation = {
-        	url: "../images/current-location-icon1.png",
-        	scaledSize: new google.maps.Size(23, 35)
+        	url: "./images/current-location-icon1.png",
+        	/*scaledSize: new google.maps.Size(23, 35)*/
         }
         var marker = new google.maps.Marker({
     	position: mapCenter,
