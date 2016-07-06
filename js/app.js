@@ -70,14 +70,49 @@ function getLocation() {
 		$.each(data.networks, function(index, listings) {
 			var networkId = listings.id;
 			var networkName = listings.name;
+			var networkLat = listings.location.latitude;
+			var networkLng = listings.location.longitude;
 			/*console.log(networkId);*/
 	
 		//additional data for each network//
 		url = "https://api.citybik.es/v2/networks/" + networkId + ""
 			$.getJSON(url, function(networks) {
 			/*console.log(networks);*/
-			/*console.log(networks.network.stations);*/
-	
+			/*console.log(networks.network.stations);*/	
+
+		var nearestNetwork = data.networks[0];
+		var nearbyNetworks = [];
+
+		function distanceFromLatLng(lat1, lng1, lat2, lng2) {
+			var radius = 6371;
+			var degreesLat = deg2rad(lat2-lat1);
+			var degreesLon = deg2rad(lng2-lng1);
+			var a =
+				Math.sin(degreesLat/2) * Math.sin(degreesLat/2) +
+    			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    			Math.sin(degreesLon/2) * Math.sin(degreesLon/2)
+    			; 
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			var distance = radius * c;
+			return distance;
+			}
+		function deg2rad(deg) {
+			return deg * (Math.PI/180)
+			}
+		
+		$.each(data.networks, function(index, network) {
+			var distanceToNetwork = distanceFromLatLng(mapCenter.lat, mapCenter.lng, networkLat, networkLng);
+			var distanceToNearest = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestNetwork.location.lat, nearestNetwork.location.lng);
+			
+			if(distanceToNetwork < distanceToNearest) {
+				nearestNetwork = network;
+			}
+			else if(distanceToNetwork < 20) {
+				nearbyNetworks.push(network);
+			}
+		});
+		console.log(nearestNetwork);
+
 		//loop through stations data for each network//
 		$.each(networks.network.stations, function(index, station) {
 			var stationName = station.name;
