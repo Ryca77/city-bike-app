@@ -89,15 +89,15 @@ function getLocation() {
 
 		//create markers for each station and add info to panel on click//
         var iconGreen = {
-        	url: "../images/bike-icon-green-small.png",
+        	url: "./images/bike-icon-green-small.png",
         	/*scaledSize: new google.maps.Size(40, 25)*/
         };
         var iconAmber = {
-        	url: "../images/bike-icon-orange-small.png",
+        	url: "./images/bike-icon-orange-small.png",
         	/*scaledSize: new google.maps.Size(40, 25)*/
         };
         var iconRed = {
-        	url: "../images/bike-icon-red-small.png",
+        	url: "./images/bike-icon-red-small.png",
         	/*scaledSize: new google.maps.Size(40, 25)*/
         };
         if(station.free_bikes >= 5) {
