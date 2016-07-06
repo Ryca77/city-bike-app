@@ -46,7 +46,7 @@ function getLocation() {
           zoom: 15
         });
         var iconLocation = {
-        	url: "../images/current-location-icon3.png",
+        	url: "../images/current-location-icon1.png",
         	scaledSize: new google.maps.Size(23, 35)
         }
         var marker = new google.maps.Marker({
@@ -62,7 +62,7 @@ function getLocation() {
 		function getBikeData() {
 
 		//initial list of networks//
-		url = "//api.citybik.es/v2/networks"
+		url = "https://api.citybik.es/v2/networks"
 			$.getJSON(url, function(data) {
 			console.log(data);
 	
@@ -73,7 +73,7 @@ function getLocation() {
 			/*console.log(networkId);*/
 	
 		//additional data for each network//
-		url = "//api.citybik.es/v2/networks/" + networkId + ""
+		url = "https://api.citybik.es/v2/networks/" + networkId + ""
 			$.getJSON(url, function(networks) {
 			/*console.log(networks);*/
 			/*console.log(networks.network.stations);*/
