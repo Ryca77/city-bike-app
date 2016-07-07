@@ -65,23 +65,6 @@ function getLocation() {
 		url = "https://api.citybik.es/v2/networks"
 			$.getJSON(url, function(data) {
 			console.log(data);
-	
-		//loop through networks//
-		$.each(data.networks, function(index, listings) {
-			var networkId = listings.id;
-			var networkName = listings.name;
-			var networkLat = listings.location.latitude;
-			var networkLng = listings.location.longitude;
-			/*console.log(networkId);*/
-	
-		//additional data for each network//
-		url = "https://api.citybik.es/v2/networks/" + networkId + ""
-			$.getJSON(url, function(networks) {
-			/*console.log(networks);*/
-			/*console.log(networks.network.stations);*/	
-
-		var nearestNetwork = data.networks[0];
-		var nearbyNetworks = [];
 
 		function distanceFromLatLng(lat1, lng1, lat2, lng2) {
 			var radius = 6371;
@@ -99,8 +82,13 @@ function getLocation() {
 		function deg2rad(deg) {
 			return deg * (Math.PI/180)
 			}
-		
+
+		var nearestNetwork = data.networks[0];
+		var nearbyNetworks = [];
+
 		$.each(data.networks, function(index, network) {
+			var networkLat = network.location.latitude;
+			var networkLng = network.location.longitude;
 			var distanceToNetwork = distanceFromLatLng(mapCenter.lat, mapCenter.lng, networkLat, networkLng);
 			var distanceToNearest = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestNetwork.location.lat, nearestNetwork.location.lng);
 			
@@ -112,6 +100,18 @@ function getLocation() {
 			}
 		});
 		console.log(nearestNetwork);
+
+		//loop through networks//
+		$.each(data.networks, function(index, listings) {
+			var networkId = listings.id;
+			var networkName = listings.name;
+			/*console.log(networkId);*/
+
+		//additional data for each network//
+		url = "https://api.citybik.es/v2/networks/" + networkId + ""
+			$.getJSON(url, function(networks) {
+			/*console.log(networks);*/
+			/*console.log(networks.network.stations);*/
 
 		//loop through stations data for each network//
 		$.each(networks.network.stations, function(index, station) {
