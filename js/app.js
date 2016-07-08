@@ -90,7 +90,7 @@ function getLocation() {
 			var networkLat = network.location.latitude;
 			var networkLng = network.location.longitude;
 			var distanceToNetwork = distanceFromLatLng(mapCenter.lat, mapCenter.lng, networkLat, networkLng);
-			var distanceToNearest = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestNetwork.location.lat, nearestNetwork.location.lng);
+			var distanceToNearest = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestNetwork.location.latitude, nearestNetwork.location.longitude);
 			
 			if(distanceToNetwork < distanceToNearest) {
 				nearestNetwork = network;
@@ -98,6 +98,7 @@ function getLocation() {
 			else if(distanceToNetwork < 20) {
 				nearbyNetworks.push(network);
 			}
+	
 		});
 		console.log(nearestNetwork);
 
