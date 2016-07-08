@@ -102,11 +102,16 @@ function getLocation() {
 		});
 		console.log(nearestNetwork);
 
+		if(!nearbyNetworks.length) {
+			nearbyNetworks.push(nearestNetwork);
+		}
+		//display message saying no network within 30km//
+
 		//loop through networks//
-		$.each(data.networks, function(index, listings) {
+		$.each(nearbyNetworks, function(index, listings) {
 			var networkId = listings.id;
 			var networkName = listings.name;
-			/*console.log(networkId);*/
+			console.log(networkId);
 
 		//additional data for each network//
 		url = "https://api.citybik.es/v2/networks/" + networkId + ""
@@ -159,12 +164,34 @@ function getLocation() {
     	$('.free-bikes').html(this.freeBikes);
 		$('.empty-slots').html(this.emptySlots);
 		});
-
 	});
 });
-	});
-});
+console.log(nearestNetwork.id);
 
+//get data from nearest network//
+url = "https://api.citybik.es/v2/networks/" + nearestNetwork.id + ""
+	$.getJSON(url, function(stationData) {
+
+var nearestStation = stationData.network.stations[0];//
+console.log(nearestStation);
+
+//loop through station data//
+$.each(stationData.network.stations, function(index, station) {
+	var distanceToStation = distanceFromLatLng(mapCenter.lat, mapCenter.lng, station.latitude, station.longitude);
+	var distanceToNearestStation = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestStation.latitude, nearestStation.longitude);
+	if(distanceToStation < distanceToNearestStation) {
+		nearestStation = station;
+		}
+});
+console.log(nearestStation);
+$('.scheme-name').html(nearestNetwork.id);
+$('.station-name').html(nearestStation.name);
+$('.free-bikes').html("Available Bikes: " + nearestStation.free_bikes + "");
+$('.empty-slots').html("Empty Slots: " + nearestStation.empty_slots + "");
+
+			});
+		});
+	});
 };
 
 getBikeData();
