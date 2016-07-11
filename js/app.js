@@ -17,15 +17,6 @@ getLocation();
 
 });
 
-//update location//
-$('.map').on('click', function() {
-	$('.map-overlay').fadeIn(500);	
-});
-$('.map-overlay').on('click', function() {
-	getLocation();
-	$('.map-overlay').hide();
-});
-
 //navigator geolocation function showing google map with marker//
 function getLocation() {
 	var bikeMap = document.getElementById('map');
@@ -57,7 +48,7 @@ function getLocation() {
     	});
 
         $(bikeMap).html(mapImage);
-
+        console.log(mapImage);
 		//get data from city bikes api//
 		function getBikeData() {
 
@@ -105,7 +96,6 @@ function getLocation() {
 		if(!nearbyNetworks.length) {
 			nearbyNetworks.push(nearestNetwork);
 		}
-		//display message saying no network within 30km//
 
 		//loop through networks//
 		$.each(nearbyNetworks, function(index, listings) {
@@ -206,6 +196,15 @@ getBikeData();
 
 	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
+
+//update location//
+$('.map').on('click', function() {
+	$('.map-overlay').fadeIn(500);	
+});
+$('.map-overlay').on('click', function() {
+	$('.map-overlay').hide();
+	setTimeout(getLocation,500);
+});
 
 //show menu//
 $('.fa-bars').on('click', function() {

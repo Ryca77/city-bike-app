@@ -71,7 +71,7 @@ body {
 .map-overlay {
 	display: none;
 	position: absolute;
-	top: 390px;
+	top: 385px;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
@@ -145,7 +145,7 @@ body {
 .menu {
 	display: none;
 	position: absolute;
-	top: 40px;
+	top: 30px;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
@@ -174,10 +174,10 @@ body {
  		height: 300px;
  	}
  	.map-overlay {
- 		top: 340px;
+ 		top: 335px;
  	}
  	.station-info {
- 		height: 120px;
+ 		height: 125px;
  	}
  	.scheme-name {
  		font-size: 20px;
@@ -187,5 +187,8 @@ body {
  	}
  	.station-info {
  		font-size: 14px;
+ 	}
+ 	.menu {
+ 		top: 30px;
  	}
  }
