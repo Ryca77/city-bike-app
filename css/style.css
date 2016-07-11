@@ -3,7 +3,6 @@ body {
 	height: 615px;
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 10px;
 	border: 2px solid black;
 	border-radius: 10px;
 }
@@ -14,7 +13,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: 90%;
 	background-position: center;
-	margin-top: 250px;
+	margin-top: 55%;
 	height: 75px;
 }
 
@@ -71,27 +70,29 @@ body {
 
 .map-overlay {
 	display: none;
-	margin: 0 auto;
 	position: absolute;
 	top: 390px;
-	left: 41.5%;
-	width: 175px;
-	height: 35px;
-	line-height: 35px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 165px;
+	height: 30px;
+	line-height: 30px;
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #FFFFFF;
 }
 
 .update-location {
-	vertical-align: middle;
 	padding-left: 5px;
+	font size: 28px;
 	font-family: 'Merriweather Sans', sans-serif;
 }
 
 .update-location-icon {
 	float: right;
-	width: 25px;
+	width: 20px;
 	margin-top: 5px;
 	margin-right: 5px;
 }
@@ -105,24 +106,6 @@ body {
 	list-style-type: none;
 	margin-left: 50px;
 	font-family: 'Merriweather Sans', sans-serif;
-}
-
-.green-bike {
-	background-image: url(../images/bike-icon-green.png);
-	background-repeat: no-repeat;
-	background-size: 30px;
-}
-
-.amber-bike {
-	background-image: url(../images/bike-icon-orange.png);
-	background-repeat: no-repeat;
-	background-size: 30px;
-}
-
-.red-bike {
-	background-image: url(../images/bike-icon-red.png);
-	background-repeat: no-repeat;
-	background-size: 30px;
 }
 
 .station-info {
@@ -162,11 +145,12 @@ body {
 .menu {
 	display: none;
 	position: absolute;
-	top: 20px;
-	width: 250px;
-	height: 100px;
-	margin-left: 100px;
-	margin-top: 20px;
+	top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 200px;
 	border: 2px solid black;
 	border-radius: 5px;
 	background-color: #FFFFFF;
@@ -175,6 +159,33 @@ body {
 .app-info {
 	list-style-type: none;
 	margin: 10px;
+	font-size: 12px;
 	font-family: 'Merriweather Sans', sans-serif;
-
 }
+
+@media only screen and (max-width: 405px) {
+ 	body {
+ 		height: 550px;
+ 	}
+ 	.get-location {
+ 		margin-top: 100px;
+ 	}
+ 	.map {
+ 		height: 300px;
+ 	}
+ 	.map-overlay {
+ 		top: 340px;
+ 	}
+ 	.station-info {
+ 		height: 120px;
+ 	}
+ 	.scheme-name {
+ 		font-size: 20px;
+ 	}
+ 	.station-name {
+ 		font-size: 16px;
+ 	}
+ 	.station-info {
+ 		font-size: 14px;
+ 	}
+ }
