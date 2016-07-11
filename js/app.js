@@ -203,7 +203,7 @@ $('.map').on('click', function() {
 });
 $('.map-overlay').on('click', function() {
 	$('.map-overlay').hide();
-	setTimeout(getLocation,500);
+	getLocation();
 });
 
 //show menu//
