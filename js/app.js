@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
 //show logo then bike finder button//
 window.onload = function() {
@@ -7,56 +7,64 @@ window.onload = function() {
 	$('.get-location').delay(3500).fadeIn(1000);
 }
 
-//call location function on button click//
+//call navigatpor geolocation function on button click//
 $('.find-bike').on('click', function() {
 
 	$('.get-location').fadeOut(1000);
-	$('.main-content').delay(1000).fadeIn(500);
+	$('.main-content').delay(1000).fadeIn(500, function () {
 
-getLocation();
-
+	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+	});
 });
 
-//navigator geolocation function showing google map with marker//
-function getLocation() {
-	var bikeMap = document.getElementById('map');
+window.map.innerHTML= "<p>Finding Location...</p>";
+
+//create generic map//
+function createMap() {
+	var mapElement = document.getElementById('map');
+ 	var mapImage = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 0, lng: 0},
+		zoom: 15
+	});
+	return mapImage;
+}
 
 	if(!navigator.geolocation) {
-		bikeMap.innerHTML = "<p>Geolocation is not supported by your browser</p>"
+		window.map.innerHTML = "<p>Geolocation is not supported by your browser</p>"
 		return;
 	}
 
+	//centre map on current location and show marker//
 	function locationSuccess(position) {
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
 		var mapCenter = {lat: latitude, lng: longitude};
 		console.log(latitude);
 		console.log(longitude);
-        var mapImage = new google.maps.Map(document.getElementById('map'), {
-          center: mapCenter,
-          zoom: 15
-        });
+		window.map = createMap();
+		window.map.panTo(mapCenter);
+        
+
         var iconLocation = {
         	url: "./images/current-location-icon1.png",
         	/*scaledSize: new google.maps.Size(23, 35)*/
         }
         var marker = new google.maps.Marker({
     	position: mapCenter,
-    	map: mapImage,
+    	map: window.map,
     	title: 'Your Location!',
     	icon: iconLocation
     	});
-
-        $(bikeMap).html(mapImage);
-        console.log(mapImage);
-		//get data from city bikes api//
-		function getBikeData() {
+        
+	//get data from city bikes api//
+	function getBikeData() {
 
 		//initial list of networks//
 		url = "https://api.citybik.es/v2/networks"
 			$.getJSON(url, function(data) {
 			console.log(data);
 
+		//determine nearest network using lat/lng calculation loop//
 		function distanceFromLatLng(lat1, lng1, lat2, lng2) {
 			var radius = 6371;
 			var degreesLat = deg2rad(lat2-lat1);
@@ -97,13 +105,13 @@ function getLocation() {
 			nearbyNetworks.push(nearestNetwork);
 		}
 
-		//loop through networks//
+		//loop through nearest networks to define id variable//
 		$.each(nearbyNetworks, function(index, listings) {
 			var networkId = listings.id;
 			var networkName = listings.name;
 			console.log(networkId);
 
-		//additional data for each network//
+		//get detailed data for each network//
 		url = "https://api.citybik.es/v2/networks/" + networkId + ""
 			$.getJSON(url, function(networks) {
 			/*console.log(networks);*/
@@ -143,11 +151,12 @@ function getLocation() {
         
         var stationMarker = new google.maps.Marker({
     	position: stationPosition,
-    	map: mapImage,
+    	map: window.map,
     	customInfo: networkName, stationName, freeBikes, emptySlots,
     	icon: mapIcon
     	});
 
+        //show station info when clicked//
     	google.maps.event.addListener(stationMarker, 'click', function() {
     	$('.scheme-name').html(this.customInfo);
     	$('.station-name').html(this.stationName);
@@ -165,7 +174,7 @@ url = "https://api.citybik.es/v2/networks/" + nearestNetwork.id + ""
 var nearestStation = stationData.network.stations[0];//
 console.log(nearestStation);
 
-//loop through station data//
+//loop through station data and show nearest station info on map load//
 $.each(stationData.network.stations, function(index, station) {
 	var distanceToStation = distanceFromLatLng(mapCenter.lat, mapCenter.lng, station.latitude, station.longitude);
 	var distanceToNearestStation = distanceFromLatLng(mapCenter.lat, mapCenter.lng, nearestStation.latitude, nearestStation.longitude);
@@ -189,13 +198,8 @@ getBikeData();
 };
 
 	function locationError() {
-		bikeMap.innerHTML = "Unable to retrieve your location";
+		window.map.innerHTML = "Unable to retrieve your location";
 	};
-
-	bikeMap.innerHTML= "<p>Finding Location...</p>";
-
-	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
-}
 
 //update location//
 $('.map').on('click', function() {
@@ -203,7 +207,7 @@ $('.map').on('click', function() {
 });
 $('.map-overlay').on('click', function() {
 	$('.map-overlay').hide();
-	getLocation();
+	navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 });
 
 //show menu//
