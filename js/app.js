@@ -211,12 +211,16 @@ $('.map-overlay').on('click', function() {
 });
 
 //show menu//
-$('.fa-bars').on('click', function() {
+$('.menu-icon, .close-icon').on('click', function() {
 	if($('.menu').is(':hidden')) {
-		$('.menu').show();
+		$('.menu').animate({height:'toggle'});
+		$('.menu-icon').animate({width:'toggle'});
+		$('.close-icon').delay(500).animate({width: 'toggle'});
 	}
 	else if($('.menu').is(':visible')) {
 		$('.menu').hide();
+		$('.close-icon').animate({width:'toggle'});
+		$('.menu-icon').delay(500).animate({width: 'toggle'});
 	}
 });
 
