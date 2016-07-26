@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cities By Bike</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans' rel='stylesheet' type='text/css'>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDf2HC-XcAoYMwtj02odxmqeBfTvYqGNdQ" async defer></script>
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="./build/city-bike-app.1.0.0.js"></script>
+</head>
+<body>
+<div class="launch-screen"></div>
+<div class="get-location">
+	<button class="find-bike">Find Me A Bike</button>
+</div>
+<div class="main-content">
+	<div>
+		<h1 class="header">Cities By Bike</h1>
+		<div><img class="menu-icon" src="./images/menu-icon.png"></div>
+		<div><img class="close-icon" src="./images/close-icon.png"></div>
+	</div>
+	<div class="map" id="map">
+	</div>
+	<div class="map-overlay">
+		<span class="update-location">Update Location</span>
+		<img src="./images/update-location-icon.png" class="update-location-icon"></img>
+	</div>
+	<div class="station-info">
+		<h2 class="scheme-name"></h2>
+		<h3 class="station-name"></h3>
+		<li class="free-bikes"></li>
+		<li class="empty-slots"></li>
+	</div>
+	<button class="directions">Show Directions</button>
+</div>
+<div class="menu">
+	<li class="app-info">Contact: info@citiesbybike.com</li>
+	<li class="app-info">Data Source: Citybikes - www.citybik.es</li>
+</div>
+</body>
