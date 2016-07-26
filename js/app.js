@@ -120,8 +120,8 @@ function createMap() {
 		//loop through stations data for each network//
 		$.each(networks.network.stations, function(index, station) {
 			var stationName = station.name;
-			var freeBikes = "Available Bikes: " + station.free_bikes + "";
-			var emptySlots = "Empty Slots: " + station.empty_slots + "";
+			var freeBikes = `Available Bikes: ${station.free_bikes}`;
+			var emptySlots = `Empty Slots: ${station.empty_slots}`;
 			var stationLat = station.latitude;
 			var stationLong = station.longitude;
 			var stationPosition = {lat: stationLat, lng: stationLong};
@@ -185,8 +185,8 @@ $.each(stationData.network.stations, function(index, station) {
 console.log(nearestStation);
 $('.scheme-name').html(nearestNetwork.id);
 $('.station-name').html(nearestStation.name);
-$('.free-bikes').html("Available Bikes: " + nearestStation.free_bikes + "");
-$('.empty-slots').html("Empty Slots: " + nearestStation.empty_slots + "");
+$('.free-bikes').html(`Available Bikes: ${nearestStation.free_bikes}`);
+$('.empty-slots').html(`Empty Slots: ${nearestStation.empty_slots}`);
 
 			});
 		});
