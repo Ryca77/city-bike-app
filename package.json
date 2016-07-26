@@ -2,9 +2,16 @@
   "name": "city-bike-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mkdir": "mkdir -p build",
+    "build": "npm run clean && npm run mkdir && npm run build:js",
+    "watch": "npm run watch:js",
+    "clean": "rm -rf build",
+    "build:js": "npm run clean:js && webpack",
+    "watch:js": "npm run build:js && webpack --watch",
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
   },
   "repository": {
     "type": "git",
@@ -18,5 +25,11 @@
   "homepage": "https://github.com/Ryca77/city-bike-app#readme",
   "dependencies": {
     "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "webpack": "^1.13.1"
   }
 }

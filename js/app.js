@@ -120,7 +120,7 @@ function createMap() {
 		//loop through stations data for each network//
 		$.each(networks.network.stations, function(index, station) {
 			var stationName = station.name;
-			var freeBikes = "Available Bikes: " + station.free_bikes + "";
+			var freeBikes = "Available Bikesss: ${station.free_bikes}";
 			var emptySlots = "Empty Slots: " + station.empty_slots + "";
 			var stationLat = station.latitude;
 			var stationLong = station.longitude;
