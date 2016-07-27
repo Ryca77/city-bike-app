@@ -18,8 +18,8 @@ if (minify) {
 module.exports = {
     entry: path.resolve(__dirname, packageData.main),
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: filename.join('.'),
+        path: path.resolve(__dirname, 'build/js'),
+        filename: 'app.js',
     },
     devtool: 'source-map',
     module: {
